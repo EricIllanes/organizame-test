@@ -7,8 +7,9 @@ const router = Router()
 router.get('/user', async (req,res)=>{
     try{
     res.status(200).send(usersDB)
-    } catch (err){
-        console.error(err)
+    } catch (error){
+        res.status(500).send({message:'Algo ha fallado en el servidor'})
+        console.error(error)
     }
 })
 
@@ -26,6 +27,7 @@ router.post('/login', async(req,res)=>{
             }
         }
     } catch (error) {
+        res.status(500).send({message:'Algo ha fallado en el servidor'})
         console.error(error)
     }
    
