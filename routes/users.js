@@ -20,8 +20,8 @@ router.post("/login", async (req, res) => {
     if (!userCheck) {
       res.status(400).send({ message: "El usuario no existe" });
     } else {
-      if (userCheck.password.toString() === password) {
-        res.status(200).send({ message: "Logeo exitoso" });
+      if (userCheck.password === password) {
+        res.status(200).send({ message: "Login exitoso" });
       } else {
         res
           .status(400)
