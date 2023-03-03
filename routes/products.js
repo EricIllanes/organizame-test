@@ -44,15 +44,12 @@ router.get("/product", async (req, res) => {
 });
 
 //ruta para crear un producto
-let acum = 4;
+let acum = 6;
 router.post("/product", async (req, res) => {
   try {
     const { sku, nombre_producto, descripcion, precio, categoria } = req.body;
     const findProductByCategoria = category.find(
       (categories) => categories.id === categoria
-    );
-    const checkNameNotRepeat = product.find(
-      (products) => products.nombre_producto === nombre_producto
     );
     const checkSkuNotReapeated = product.find(
       (products) => products.sku === sku
@@ -62,8 +59,8 @@ router.post("/product", async (req, res) => {
       !sku?.trim() ||
       !nombre_producto?.trim() ||
       !descripcion?.trim() ||
-      !precio?.trim() ||
-      !categoria?.trim()
+      !precio ||
+      !categoria
     ) {
       res.status(400).send({ message: "Debe proporcionar todos los datos" });
     } else if (sku.length > 5) {
@@ -78,10 +75,6 @@ router.post("/product", async (req, res) => {
         .send({
           message: `No se ha encontrado una categoría con el id: ${categoria}`,
         });
-    } else if (checkNameNotRepeat) {
-      res.status(400).send({
-        message: `Ya existe un producto con el nombre ${nombre_producto}`,
-      });
     } else {
       product.push({
         id: acum,
