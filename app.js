@@ -4,7 +4,7 @@ const express = require("express");
 const routes = require("./routes/index.js");
 const { usersDB } = require("./database.js");
 const morgan = require("morgan");
-const {PORT} = process.env
+const { PORT } = process.env;
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
@@ -17,9 +17,9 @@ let initialState = [
 ];
 
 async function StartDB() {
-  initialState.forEach(e=>{
-    return usersDB.push(e)
-  })
+  initialState.forEach((e) => {
+    return usersDB.push(e);
+  });
   app.listen(PORT, () => {
     console.log(`Server UP on port ${PORT} ~(*-*)~`);
   });
